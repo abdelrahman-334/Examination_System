@@ -1,7 +1,6 @@
 import sql from "mssql"
 import dotenvx from "@dotenvx/dotenvx"
 
-dotenvx.config();
 
 const sqlConfig = {
  user: process.env.DB_USER,

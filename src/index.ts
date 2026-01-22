@@ -3,7 +3,6 @@ import dotenvx from "@dotenvx/dotenvx"
 import {connectDb} from "./connections/databaseConnection";
 import cors from "cors"
 import departmentRoutes from "./routes/departmentRoutes";
-dotenvx.config()
 const app = express()
 
 const port = process.env.PORT || 5000;
