@@ -17,9 +17,7 @@
     "@types/mssql": "^9.1.9",
     "@types/node": "^25.0.10",
     "nodemon": "^3.1.11",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.51.4",
@@ -28,6 +26,8 @@
     "express": "^5.2.1",
     "mssql": "^12.2.0",
     "tedious": "^19.2.0",
-    "tsc": "^2.0.4"
+    "tsc": "^2.0.4",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
