@@ -8,9 +8,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/src/index.js", 
+    "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts"
-},
+  },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
