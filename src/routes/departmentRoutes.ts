@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { DepartmentController } from '../controllers/departmentController';
+import { authenticateToken } from '../middleware/auth.middleware';
 
 const router = Router();
 
+router.use(authenticateToken)
 router.post('/', DepartmentController.create);
 
 router.get('/', DepartmentController.getAll);

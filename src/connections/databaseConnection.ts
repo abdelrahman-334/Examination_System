@@ -2,11 +2,14 @@ import sql from "mssql"
 import dotenvx from "@dotenvx/dotenvx"
 
 
+if(!process.env.PROD){
+    dotenvx.config()
+}
 const sqlConfig = {
- user: process.env.DB_USER,
-  password: process.env.DB_PWD,
-  database: process.env.DB_NAME,
-  server: process.env.DB_SERVER || '.\SQLEXPRESS',
+ user: process.env.DB_USER || "Backend",
+  password: process.env.DB_PWD || "backend123",
+  database: process.env.DB_NAME || "ExaminationSystem",
+  server: process.env.DB_SERVER || "localhost\\SQLEXPRESS",
   pool: {
     max: 10,
     min: 0,
@@ -14,7 +17,7 @@ const sqlConfig = {
   },
   options: {
     encrypt: true,
-    trustServerCertificate: false // change to true for local dev / self-signed certs
+    trustServerCertificate: process.env.DB_TRUST_CERT === 'true' // change to true for local dev / self-signed certs
   }
 }
 
