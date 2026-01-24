@@ -6,6 +6,7 @@ import departmentRoutes from "./routes/departmentRoutes";
 import authRoutes from "./routes/authRoutes"
 import { Request } from "express";
 import { JwtPayload } from "jsonwebtoken";
+import courseRoutes from "./routes/courseRouter"
 const app = express()
 
 const port = process.env.PORT || 5000;
@@ -17,6 +18,8 @@ app.use(express.json());
 
 app.use('/api/departments', departmentRoutes);
 app.use('/api/auth',authRoutes);
+app.use('/api/courses', courseRoutes);
+
 
 declare global{
     namespace Express{
