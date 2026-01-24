@@ -5,7 +5,6 @@ import { ISqlResponse } from '../types/department.types';
 import bcrypt from "bcrypt"
 import hashPassword from '../utils/hashPassword';
 import jwt,{SignOptions} from 'jsonwebtoken'
-import { Sign } from 'node:crypto';
 export class AuthService {
     
     static async registerStudent(data: IRegisterStudentDTO): Promise<{ success: boolean; message: string }> {
