@@ -31,6 +31,10 @@ export const connectDb = async () => {
         return pool
     } catch (err: any) {
         console.error('ERROR OCCURRED:');
+        console.log('DB_USER:', process.env.DB_USER);
+        console.log('DB_SERVER:', process.env.DB_SERVER);
+        console.log('DB_NAME:', process.env.DB_NAME);
+        console.log("CERT: ", process.env.DB_TRUST_CERT)
         console.error(err.message);
     }
 }
