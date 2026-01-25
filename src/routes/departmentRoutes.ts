@@ -4,14 +4,13 @@ import { authenticateToken } from '../middleware/auth.middleware';
 
 const router = Router();
 
-router.use(authenticateToken)
-router.post('/', DepartmentController.create);
+router.post('/',authenticateToken, DepartmentController.create);
 
 router.get('/', DepartmentController.getAll);
 router.get('/:id', DepartmentController.getById);
 
-router.put('/:id', DepartmentController.update);
+router.put('/:id', authenticateToken,DepartmentController.update);
 
-router.delete('/:id', DepartmentController.delete);
+router.delete('/:id', authenticateToken,DepartmentController.delete);
 
 export default router;
