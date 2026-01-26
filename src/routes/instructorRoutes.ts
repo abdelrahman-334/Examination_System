@@ -11,6 +11,7 @@ router.get('/', InstructorController.getAll);
 router.get('/:userName', InstructorController.getById);
 
 // Assuming only Instructors can update other instructors (or Admin if you had one)
+router.get('/instructor-stats/:userName', requireRole('Instructor'), InstructorController.getInstructorStats);
 router.put('/:userName', requireRole('Instructor'), InstructorController.update);
 router.delete('/:userName', requireRole('Instructor'), InstructorController.delete);
 

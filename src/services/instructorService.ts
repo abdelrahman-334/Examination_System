@@ -4,6 +4,7 @@ import { ISqlResponse } from '../types/department.types';
 import { IRegisterInstructorDTO } from '../types/auth.types';
 import { AuthService } from './authService';
 import hashPassword from '../utils/hashPassword';
+import { IInstructorStatsItem } from '../types/report.types';
 
 export class InstructorService {
     
@@ -15,6 +16,14 @@ export class InstructorService {
     static async getAllInstructors(): Promise<IInstructorProfile[]> {
         const request = new sql.Request();
         const result = await request.execute('sp_Instructor_GetAll');
+        return result.recordset;
+    }
+
+    static async getInstructorStats(instructorUserName: string): Promise<IInstructorStatsItem[]> {
+        const request = new sql.Request();
+        const result = await request
+            .input('instructorUserName', sql.VarChar(50), instructorUserName)
+            .execute('sp_Report_GetInstructorStats');
         return result.recordset;
     }
 

@@ -4,6 +4,7 @@ import { ISqlResponse } from '../types/department.types';
 import { AuthService } from './authService';
 import { IRegisterStudentDTO } from '../types/auth.types';
 import hashPassword from '../utils/hashPassword';
+import { IStudentReportItem } from '../types/report.types';
 
 export class StudentService {
 
@@ -16,6 +17,14 @@ export class StudentService {
     static async getAllStudents(): Promise<IStudentProfile[]> {
         const request = new sql.Request();
         const result = await request.execute('sp_Student_GetAll');
+        return result.recordset;
+    }
+
+    static async getStudentsByDepartment(deptNo: number): Promise<IStudentReportItem[]> {
+        const request = new sql.Request();
+        const result = await request
+            .input('deptNo', sql.Int, deptNo)
+            .execute('sp_Report_GetStudentsByDepartment');
         return result.recordset;
     }
 
@@ -54,6 +63,7 @@ export class StudentService {
         const response = result.recordset[0] as ISqlResponse;
         return { success: response.Success === 1, message: response.Message };
     }
+
 
     // Delete (Cascades to SystemUser)
     static async deleteStudent(userName: string): Promise<{ success: boolean; message: string }> {

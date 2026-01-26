@@ -26,6 +26,15 @@ export class StudentController {
         }
     }
 
+    static async getStudentsByDept(req: Request, res: Response) {
+        try {
+            const deptNo = parseInt(req.params.deptNo);
+            const data = await StudentService.getStudentsByDepartment(deptNo);
+            res.json(data);
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching report', error: error.message });
+        }
+    }
 
     static async getAll(req: Request, res: Response) {
         try {

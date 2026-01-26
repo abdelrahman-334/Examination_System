@@ -28,7 +28,16 @@ export class InstructorController {
             res.status(500).json({ message: 'Error creating instructor', error: error.message });
         }
     }
-
+    
+    static async getInstructorStats(req: Request, res: Response) {
+        try {
+            const userName = req.params.userName;
+            const data = await InstructorService.getInstructorStats(userName);
+            res.json(data);
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching report', error: error.message });
+        }
+    }
     
     static async getAll(req: Request, res: Response) {
         try {
