@@ -12,6 +12,7 @@ import instructorRoutes from "./routes/instructorRoutes"
 import topicRoutes from "./routes/topicRoutes"
 import questionRoutes from "./routes/questionRoutes"
 import answerRoutes from "./routes/answerRoutes";
+import examRoutes from "./routes/examRoutes";
 const app = express()
 
 const port = process.env.PORT || 5000;
@@ -29,6 +30,7 @@ app.use('/api/instructors', instructorRoutes);
 app.use('/api/topics', topicRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/answers', answerRoutes);
+app.use('/api/exams', examRoutes);
 
 declare global{
     namespace Express{
