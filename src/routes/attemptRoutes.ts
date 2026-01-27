@@ -19,4 +19,6 @@ router.post('/finish', AttemptController.finishExam);
 // 4. View History
 router.get('/history', AttemptController.getHistory);
 
+
+router.get('/:attemptId/review', AttemptController.getStudentExamAnswers);
 export default router;

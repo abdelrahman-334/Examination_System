@@ -19,3 +19,11 @@ export interface ITopicReportItem {
     topicName: string;
     topicDesc: string;
 }
+
+export interface IStudentExamResultItem {
+    questionText: string;
+    questionGrade: number;
+    SelectedAnswer: string;
+    Result: 'Correct' | 'Incorrect';
+    CorrectAnswerText: string;
+}

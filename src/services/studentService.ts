@@ -1,5 +1,5 @@
 import sql  from '../connections/databaseConnection';
-import { IStudentProfile, IUpdateStudentDTO } from '../types/user.types';
+import { IStudentGradeReport, IStudentProfile, IUpdateStudentDTO } from '../types/user.types';
 import { ISqlResponse } from '../types/department.types';
 import { AuthService } from './authService';
 import { IRegisterStudentDTO } from '../types/auth.types';
@@ -74,5 +74,14 @@ export class StudentService {
             
         const response = result.recordset[0] as ISqlResponse;
         return { success: response.Success === 1, message: response.Message };
+    }
+
+    static async getStudentGrades(userName: string): Promise<IStudentGradeReport[]> {
+        const request = new sql.Request();
+        const result = await request
+            .input('userName', sql.VarChar(50), userName)
+            .execute('sp_Report_GetStudentGrades');
+        
+        return result.recordset;
     }
 }

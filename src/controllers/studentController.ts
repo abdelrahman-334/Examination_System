@@ -74,4 +74,22 @@ export class StudentController {
             res.status(500).json({ message: 'Error deleting student', error: error.message });
         }
     }
+
+
+    static async getGrades(req: Request, res: Response) {
+        try {
+            const targetUser = req.params.userName;
+            const currentUser = req.user as any;
+
+            if (currentUser.role !== 'Instructor' && currentUser.userName !== targetUser) {
+                return res.status(403).json({ message: 'Access Denied: You cannot view grades for another student.' });
+            }
+
+            const grades = await StudentService.getStudentGrades(targetUser);
+            res.json(grades);
+
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching grades', error: error.message });
+        }
+    }
 }

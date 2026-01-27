@@ -25,3 +25,12 @@ export interface IUpdateAnswerDTO {
 export interface IFinishExamDTO {
     attemptId: number;
 }
+
+
+export interface IStudentExamResultItem {
+    questionText: string;
+    questionGrade: number;
+    SelectedAnswer: string;
+    Result: 'Correct' | 'Incorrect';
+    CorrectAnswerText: string;
+}

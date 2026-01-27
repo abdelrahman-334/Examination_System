@@ -127,23 +127,7 @@ export class ExamService {
     }
 
 
-    // questionId: number;
-    // questionText: string;
-    // questionGrade: number;
-    // difficulty: string;
-    // answerId: number;
-    // answerText: string;
-    // isCorrect?: boolean;
-
-    // questionId: number;
-    // questionText: string;
-    // questionGrade: number;
-    // difficulty: string;
-    // answers: {
-    //     answerId: number;
-    //     answerText: string;
-    //     isCorrect?: boolean;
-    // }[];
+ 
     
     // Helper Function: Groups flat rows into Questions with Answer Arrays
     private static groupQuestions(rows: IExamPaperRow[]): IExamPaperQuestion[] {

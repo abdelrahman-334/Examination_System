@@ -77,4 +77,14 @@ export class AttemptController {
             res.status(500).json({ message: 'Error fetching history', error: error.message });
         }
     }
+
+    static async getStudentExamAnswers(req: Request, res: Response) {
+        try {
+            const attemptId = parseInt(req.params.attemptId);
+            const data = await AttemptService.getStudentExamAnswers(attemptId);
+            res.json(data);
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching exam results', error: error.message });
+        }
+    }
 }

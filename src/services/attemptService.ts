@@ -1,5 +1,5 @@
 import sql from '../connections/databaseConnection';
-import { IStartExamDTO, ISubmitAnswerDTO, IUpdateAnswerDTO, IAttempt } from '../types/attempt.types';
+import { IStartExamDTO, ISubmitAnswerDTO, IUpdateAnswerDTO, IAttempt, IStudentExamResultItem } from '../types/attempt.types';
 import { ISqlResponse } from '../types/department.types';
 
 export class AttemptService {
@@ -75,4 +75,15 @@ export class AttemptService {
         
         return result.recordset;
     }
+
+    static async getStudentExamAnswers(attemptId: number): Promise<IStudentExamResultItem[]> {
+        const request = new sql.Request();
+        const result = await request
+            .input('AttemptId', sql.Int, attemptId)
+            // We don't need ExamNo/User here because AttemptId is unique and sufficient
+            .execute('sp_Report_GetStudentExamAnswers');
+        
+        return result.recordset;
+    }
+    
 }

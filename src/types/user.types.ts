@@ -43,3 +43,13 @@ export interface IUpdateInstructorDTO {
     degree?: string;
     salary?: number;
 }
+
+
+export interface IStudentGradeReport {
+    courseName: string;
+    ExamNo: number;
+    examDate: string;
+    StudentScore: number;
+    MaxScore: number;
+    PercentageGrade: number;
+}

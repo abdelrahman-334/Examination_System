@@ -16,5 +16,6 @@ router.get('/:userName', StudentController.getById);
 router.get('/dept/:deptNo', requireRole('Instructor'), StudentController.getStudentsByDept);
 router.put('/:userName', requireRole('Instructor'), StudentController.update);
 router.delete('/:userName', requireRole('Instructor'), StudentController.delete);
+router.get('/:userName/grades', StudentController.getGrades);
 
 export default router;
