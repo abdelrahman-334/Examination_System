@@ -144,4 +144,27 @@ export class ExamController {
             res.status(500).json({ message: 'Error clearing exam questions', error: error.message });
         }
     }
+
+    static async getExamPaper(req: Request, res: Response) {
+        try {
+            const examNo = parseInt(req.params.examNo);
+            const paper = await ExamService.getExamPaper(examNo);
+            res.json(paper);
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching exam paper', error: error.message });
+        }
+    }
+
+    
+
+    //  GET /api/exams/:examNo/key (Instructor View)
+    static async getExamKey(req: Request, res: Response) {
+        try {
+            const examNo = parseInt(req.params.examNo);
+            const key = await ExamService.getExamKey(examNo);
+            res.json(key);
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching exam key', error: error.message });
+        }
+    }
 }

@@ -29,3 +29,27 @@ export interface IGenerateExamDTO {
 export interface IAddQuestionToExamDTO {
     questionId: number;
 }
+
+// The raw row from SQL (Flat)
+export interface IExamPaperRow {
+    questionId: number;
+    questionText: string;
+    questionGrade: number;
+    difficulty: string;
+    answerId: number;
+    answerText: string;
+    isCorrect?: boolean; // Optional, only present in Instructor view
+}
+
+// The clean nested structure for Frontend
+export interface IExamPaperQuestion {
+    questionId: number;
+    questionText: string;
+    questionGrade: number;
+    difficulty: string;
+    answers: {
+        answerId: number;
+        answerText: string;
+        isCorrect?: boolean;
+    }[];
+}

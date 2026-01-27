@@ -1,5 +1,5 @@
 import sql from '../connections/databaseConnection';
-import { IGenerateExamDTO, IExam, IExamQuestionItem } from '../types/exam.types';
+import { IGenerateExamDTO, IExam, IExamQuestionItem, IExamPaperRow, IExamPaperQuestion } from '../types/exam.types';
 import { ISqlResponse } from '../types/department.types';
 
 export class ExamService {
@@ -105,4 +105,72 @@ export class ExamService {
         const response = result.recordset[0] as ISqlResponse;
         return { success: response.Success === 1, message: response.Message };
     }
+
+    static async getExamPaper(examNo: number): Promise<IExamPaperQuestion[]> {
+        const request = new sql.Request();
+        const result = await request
+            .input('ExamNo', sql.Int, examNo)
+            .execute('sp_Exam_GetQuestionsWithAnswers'); // The Student SP
+
+        // Helper to transform Flat SQL -> Nested JSON
+        return this.groupQuestions(result.recordset);
+    }
+
+    // Get Exam Answer Key (For Instructor)
+    static async getExamKey(examNo: number): Promise<IExamPaperQuestion[]> {
+        const request = new sql.Request();
+        const result = await request
+            .input('ExamNo', sql.Int, examNo)
+            .execute('sp_Exam_GetQuestionsWithCorrectAnswers'); // The Instructor SP
+
+        return this.groupQuestions(result.recordset);
+    }
+
+
+    // questionId: number;
+    // questionText: string;
+    // questionGrade: number;
+    // difficulty: string;
+    // answerId: number;
+    // answerText: string;
+    // isCorrect?: boolean;
+
+    // questionId: number;
+    // questionText: string;
+    // questionGrade: number;
+    // difficulty: string;
+    // answers: {
+    //     answerId: number;
+    //     answerText: string;
+    //     isCorrect?: boolean;
+    // }[];
+    
+    // Helper Function: Groups flat rows into Questions with Answer Arrays
+    private static groupQuestions(rows: IExamPaperRow[]): IExamPaperQuestion[] {
+        const map = new Map<number, IExamPaperQuestion>();
+
+        rows.forEach(row => {
+            if (!map.has(row.questionId)) {
+                map.set(row.questionId, {
+                    questionId: row.questionId,
+                    questionText: row.questionText,
+                    questionGrade: row.questionGrade,
+                    difficulty: row.difficulty,
+                    answers: []
+                });
+            }
+
+            // Push the answer to the array
+            if (row.answerId) {
+                map.get(row.questionId)!.answers.push({
+                    answerId: row.answerId,
+                    answerText: row.answerText,
+                    isCorrect: row.isCorrect // Will be undefined for students
+                });
+            }
+        });
+
+        return Array.from(map.values());
+    }
+    
 }
