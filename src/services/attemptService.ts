@@ -85,5 +85,13 @@ export class AttemptService {
         
         return result.recordset;
     }
-    
+
+      static async getExamAttempts(examNo: number): Promise<IAttempt[]> {
+        const request = new sql.Request();
+        const result = await request
+            .input('examNo', sql.Int, examNo)
+            .execute('sp_ExamAttempt_GetByExam');
+        
+        return result.recordset;
+    }
 }

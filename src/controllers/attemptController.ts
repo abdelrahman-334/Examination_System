@@ -87,4 +87,14 @@ export class AttemptController {
             res.status(500).json({ message: 'Error fetching exam results', error: error.message });
         }
     }
+
+    static async getExamAttempts(req: Request, res: Response) {
+        try {
+            const examNo = parseInt(req.params.examNo);
+            const attempts = await AttemptService.getExamAttempts(examNo);
+            res.json(attempts);
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching exam attempts', error: error.message });
+        }
+    }
 }

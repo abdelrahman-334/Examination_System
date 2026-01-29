@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { AttemptController } from '../controllers/attemptController';
-import { authenticateToken } from '../middleware/auth.middleware';
+import { authenticateToken, requireRole } from '../middleware/auth.middleware';
 
 const router = Router();
 
@@ -21,4 +21,7 @@ router.get('/history', AttemptController.getHistory);
 
 
 router.get('/:attemptId/review', AttemptController.getStudentExamAnswers);
+
+router.get('/exam/:examNo', requireRole('Instructor'), AttemptController.getExamAttempts);
+
 export default router;

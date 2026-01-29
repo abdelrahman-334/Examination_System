@@ -31,4 +31,7 @@ router.get('/instructor/:userName', EnrollmentController.getInstructorCourses);
 // Un-assign
 router.delete('/instructor/:userName/course/:courseId', requireRole('Instructor'), EnrollmentController.deleteInstructorAssignment);
 
+
+// get instructors in course
+router.get('/course/:courseId/instructors', EnrollmentController.getCourseInstructors);
 export default router;

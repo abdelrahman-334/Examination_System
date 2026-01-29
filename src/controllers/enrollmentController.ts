@@ -102,4 +102,14 @@ export class EnrollmentController {
             res.status(500).json({ message: 'Error removing instructor', error: error.message });
         }
     }
+
+    static async getCourseInstructors(req: Request, res: Response) {
+        try {
+            const courseId = parseInt(req.params.courseId);
+            const data = await EnrollmentService.getInstructorsInCourse(courseId);
+            res.json(data);
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching course instructors', error: error.message });
+        }
+    }
 }
