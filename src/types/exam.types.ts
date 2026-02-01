@@ -17,7 +17,6 @@ export interface IExamQuestionItem {
 
 // DTO for the Generator
 export interface IGenerateExamDTO {
-    ExamNo: number;       // Manual ID for the exam
     courseId: number;
     examDuration: number; // Minutes
     noOfQuestions: number;

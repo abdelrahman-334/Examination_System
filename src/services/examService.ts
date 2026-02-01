@@ -7,7 +7,6 @@ export class ExamService {
     static async createExam(data:IGenerateExamDTO) : Promise<{success : boolean; message:string}>{
             const request = new sql.Request();
             const result = await request
-            .input('ExamNo', sql.Int, data.ExamNo)
             .input('courseId', sql.Int, data.courseId)
             .input('examDuration', sql.Int, data.examDuration)
             .input('noOfQuestions', sql.Int, data.noOfQuestions)
@@ -28,11 +27,10 @@ export class ExamService {
     }
     // 1. GENERATE EXAM (The "Magic" Button)
     // This creates the Exam Header AND randomly picks questions
-    static async generateExam(data: IGenerateExamDTO): Promise<{ success: boolean; message: string }> {
+    static async generateExam(data: IGenerateExamDTO): Promise<{ success: boolean; message: string, examNo?: number }> {
         const request = new sql.Request();
 
         const result = await request
-            .input('ExamNo', sql.Int, data.ExamNo)
             .input('courseId', sql.Int, data.courseId)
             .input('examDuration', sql.Int, data.examDuration)
             .input('noOfQuestions', sql.Int, data.noOfQuestions)
@@ -41,7 +39,7 @@ export class ExamService {
             .execute('sp_GenerateExam'); // Uses the randomization logic we wrote in SQL
 
         const response = result.recordset[0] as ISqlResponse;
-        return { success: response.Success === 1, message: response.Message };
+        return { success: response.Success === 1, message: response.Message, examNo: response.examNo };
     }
 
     // 2. Get All Exams (Headers only)

@@ -9,8 +9,8 @@ export class ExamController {
         try {
             const data: IGenerateExamDTO = req.body;
 
-            if (!data.ExamNo || !data.courseId || !data.noOfQuestions) {
-                return res.status(400).json({ message: 'Exam No, Course ID, and Number of Questions are required' });
+            if (!data.courseId || !data.noOfQuestions) {
+                return res.status(400).json({ message: 'Course ID, and Number of Questions are required' });
             }
 
             const result = await ExamService.createExam(data);
@@ -46,8 +46,8 @@ export class ExamController {
             const data: IGenerateExamDTO = req.body;
 
             // Basic Validation
-            if (!data.ExamNo || !data.courseId || !data.noOfQuestions) {
-                return res.status(400).json({ message: 'Exam No, Course ID, and Number of Questions are required' });
+            if (!data.courseId || !data.noOfQuestions) {
+                return res.status(400).json({ message: 'Course ID, and Number of Questions are required' });
             }
 
             const result = await ExamService.generateExam(data);

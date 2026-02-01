@@ -14,5 +14,6 @@ export interface ICreateDepartmentDTO {
 export interface ISqlResponse {
     Success: number; // 1 or 0
     Message: string;
+    examNo?: number;
     DeptNo?: number; // Only present on Insert
 }
