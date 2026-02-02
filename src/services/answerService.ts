@@ -5,18 +5,17 @@ import { ISqlResponse } from '../types/department.types';
 export class AnswerService {
     
     // 1. Create Answer
-    static async createAnswer(data: ICreateAnswerDTO): Promise<{ success: boolean; message: string }> {
+    static async createAnswer(data: ICreateAnswerDTO): Promise<{ success: boolean; message: string, answerId?: number }> {
         const request = new sql.Request();
 
         const result = await request
-            .input('answerId', sql.Int, data.answerId)
             .input('questionId', sql.Int, data.questionId)
             .input('isCorrect', sql.Bit, data.isCorrect) // 1 or 0
             .input('answerText', sql.VarChar(sql.MAX), data.answerText)
             .execute('sp_QuestionAnswers_Insert');
 
         const response = result.recordset[0] as ISqlResponse;
-        return { success: response.Success === 1, message: response.Message };
+        return { success: response.Success === 1, message: response.Message, answerId: response.answerId };
     }
 
     // 2. Get All Answers (Admin/Debug mostly)

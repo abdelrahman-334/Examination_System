@@ -4,11 +4,10 @@ import { ISqlResponse } from '../types/department.types';
 
 export class QuestionService {
     
-    static async createQuestion(data: ICreateQuestionDTO): Promise<{ success: boolean; message: string }> {
+    static async createQuestion(data: ICreateQuestionDTO): Promise<{ success: boolean; message: string, questionId?: number }> {
         const request = new sql.Request();
 
         const result = await request
-            .input('questionId', sql.Int, data.questionId)
             .input('courseId', sql.Int, data.courseId)
             .input('difficulty', sql.VarChar(20), data.difficulty)
             .input('questionText', sql.VarChar(sql.MAX), data.questionText)
@@ -16,7 +15,7 @@ export class QuestionService {
             .execute('sp_Question_Insert');
 
         const response = result.recordset[0] as ISqlResponse;
-        return { success: response.Success === 1, message: response.Message };
+        return { success: response.Success === 1, message: response.Message, questionId: response.questionId };
     }
 
     static async getAllQuestions(): Promise<IQuestion[]> {

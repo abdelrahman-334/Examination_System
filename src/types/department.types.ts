@@ -16,4 +16,6 @@ export interface ISqlResponse {
     Message: string;
     examNo?: number;
     DeptNo?: number; // Only present on Insert
+    answerId?: number;
+    questionId?: number;
 }

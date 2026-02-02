@@ -6,7 +6,6 @@ export interface IAnswer {
 }
 
 export interface ICreateAnswerDTO {
-    answerId: number; // Manual ID
     questionId: number;
     isCorrect: boolean;
     answerText: string;

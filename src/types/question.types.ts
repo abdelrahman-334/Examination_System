@@ -7,7 +7,6 @@ export interface IQuestion {
 }
 
 export interface ICreateQuestionDTO {
-    questionId: number; 
     courseId: number;
     difficulty: string; 
     questionText: string;

@@ -10,7 +10,7 @@ export class AnswerController {
             const data: ICreateAnswerDTO = req.body;
 
             // Basic Validation
-            if (!data.answerId || !data.questionId || !data.answerText) {
+            if ( !data.questionId || !data.answerText) {
                 return res.status(400).json({ message: 'Answer ID, Question ID, and Text are required' });
             }
 
