@@ -82,6 +82,24 @@ export class ExamController {
             res.status(500).json({ message: 'Error fetching exam questions', error: error.message });
         }
     }
+     
+    //GET /api/exams/student/available
+    static async getStudentExams(req: Request, res: Response) {
+        try {
+            const user = req.user as any; 
+
+            
+            if (user.role !== 'Student') {
+                return res.status(403).json({ message: 'Only students can view their available exams' });
+            }
+
+            const exams = await ExamService.getExamsForStudent(user.userName);
+            res.json(exams);
+
+        } catch (error: any) {
+            res.status(500).json({ message: 'Error fetching student exams', error: error.message });
+        }
+    }
 
     // POST /api/exams/:examNo/questions (Manual Add)
     static async addQuestion(req: Request, res: Response) {

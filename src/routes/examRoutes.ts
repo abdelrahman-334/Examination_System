@@ -11,7 +11,7 @@ router.get('/', ExamController.getAll);
 router.get('/:examNo', ExamController.getById); // Get Exam Info
 router.get('/:examNo/questions', ExamController.getQuestions); // See the paper
 router.get('/:examNo/take', ExamController.getExamPaper); 
-
+router.get('/student/available', ExamController.getStudentExams);
 // Write (Instructors Only)
 router.post('/', requireRole('Instructor'), ExamController.create);
 router.get('/:examNo/key', requireRole('Instructor'), ExamController.getExamKey);

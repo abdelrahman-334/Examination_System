@@ -1,5 +1,5 @@
 import sql from '../connections/databaseConnection';
-import { IGenerateExamDTO, IExam, IExamQuestionItem, IExamPaperRow, IExamPaperQuestion } from '../types/exam.types';
+import { IGenerateExamDTO, IExam, IExamQuestionItem, IExamPaperRow, IExamPaperQuestion, IStudentExamView } from '../types/exam.types';
 import { ISqlResponse } from '../types/department.types';
 
 export class ExamService {
@@ -123,6 +123,14 @@ export class ExamService {
         return this.groupQuestions(result.recordset);
     }
 
+    static async getExamsForStudent(userName: string): Promise<IStudentExamView[]> {
+        const request = new sql.Request();
+        const result = await request
+            .input('username', sql.VarChar(50), userName)
+            .execute('sp_Exam_GetExamsForStudent');
+        
+        return result.recordset;
+    }
 
  
     

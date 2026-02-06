@@ -52,3 +52,7 @@ export interface IExamPaperQuestion {
         isCorrect?: boolean;
     }[];
 }
+
+export interface IStudentExamView extends IExam {
+    courseName: string;
+}
