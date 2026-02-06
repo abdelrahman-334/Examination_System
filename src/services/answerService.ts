@@ -34,7 +34,7 @@ export class AnswerService {
 
         return result.recordset[0] || null;
     }
-
+ 
     // 4. Get Answers By Question ID (Crucial for Frontend)
     static async getAnswersByQuestionId(questionId: number): Promise<IAnswer[]> {
         const request = new sql.Request();
