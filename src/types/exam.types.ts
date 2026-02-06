@@ -21,7 +21,7 @@ export interface IGenerateExamDTO {
     examDuration: number; // Minutes
     noOfQuestions: number;
     examDate: string;     // "YYYY-MM-DD"
-    totalGrade: number;
+    totalGrade?: number;
 }
 
 // DTO for Manually Adding a Question to an existing Exam

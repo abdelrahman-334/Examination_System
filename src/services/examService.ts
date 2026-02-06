@@ -35,7 +35,6 @@ export class ExamService {
             .input('examDuration', sql.Int, data.examDuration)
             .input('noOfQuestions', sql.Int, data.noOfQuestions)
             .input('examDate', sql.Date, data.examDate)
-            .input('totalGrade', sql.Int, data.totalGrade)
             .execute('sp_GenerateExam'); // Uses the randomization logic we wrote in SQL
 
         const response = result.recordset[0] as ISqlResponse;
