@@ -51,6 +51,7 @@ app.get('/', (req, res) => {
 });
 
 const startServer = async () => {
+    const connectWithRetry = async () => {
     try {
         await connectDb(); 
         
@@ -60,8 +61,10 @@ const startServer = async () => {
 
     } catch (error) {
         console.error("Failed to start the server:", error);
-        process.exit(1);
+        setTimeout(connectWithRetry, 5000);
     }
+    }
+    connectWithRetry();
 };
 
 startServer();
